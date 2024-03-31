@@ -50,7 +50,7 @@ Future<GiphyGif?> pickGIF(BuildContext context) async {
     gif = await Giphy.getGif(
       context: context,
       apiKey:'hgLeSY93SSZP4vk8tcULff4lSX4f1iaq',
-      // 'KIydNP9M0RRTdLMcJT0raGntwsKuABXn'
+      // 'KIydNP9M0RRTdLMcJT0raGntwsKuABXn.........'
     );
   } catch (e) {
     showSnackBar(context: context, content: e.toString());
