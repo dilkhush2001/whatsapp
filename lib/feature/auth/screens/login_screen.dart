@@ -46,7 +46,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
       // ProviderRef ~ Interact provider with provider
       // WidgetRef ~ Makes widget interact with provider
     } else {
-      showSnackBar(context: context, content: 'Fill out all the fields!');
+      showSnackBar(context: context, content: 'Fill the all the details');
     }
   }
 
@@ -102,7 +102,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
               TextButton(
                 onPressed: pickCountry,
                 child: Text(
-                  'Pick Country',
+                  'select Country',
                   style: TextStyle(
                     color: currentBrightness == Brightness.light
                         ? const Color.fromARGB(229, 3, 66, 36)

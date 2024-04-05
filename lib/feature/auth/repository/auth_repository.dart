@@ -4,18 +4,18 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp/Common/repository/firebase_storage_repo.dart';
-import 'package:whatsapp/Common/utils/utils.dart';
-import 'package:whatsapp/feature/auth/screens/otp_screen.dart';
-import 'package:whatsapp/feature/auth/screens/user_info_screen.dart';
-import 'package:whatsapp/models/user_model.dart';
-import 'package:whatsapp/responsive/mobile_screen_layout.dart';
-import 'package:whatsapp/responsive/responsive_layout.dart';
-import 'package:whatsapp/responsive/web_screen_layout.dart';
 
+import '../../../Common/repository/firebase_storage_repo.dart';
+import '../../../Common/utils/utils.dart';
+import '../../../models/user_model.dart';
+import '../../../responsive/mobile_screen_layout.dart';
+import '../../../responsive/responsive_layout.dart';
+import '../../../responsive/web_screen_layout.dart';
+import '../screens/otp_screen.dart';
+import '../screens/user_info_screen.dart';
 
 final authRepositoryProvider = Provider(
-  (ref) => AuthRepoistory(
+      (ref) => AuthRepoistory(
     auth: FirebaseAuth.instance,
     firestore: FirebaseFirestore.instance,
   ),
@@ -32,7 +32,7 @@ class AuthRepoistory {
 
   Future<UserModel?> getCurrentUserData() async {
     var userData =
-        await firestore.collection('users').doc(auth.currentUser?.uid).get();
+    await firestore.collection('users').doc(auth.currentUser?.uid).get();
 
     UserModel? user;
     if (userData.data() != null) {
@@ -78,9 +78,10 @@ class AuthRepoistory {
       );
       await auth.signInWithCredential(credential);
       // ignore: use_build_context_synchronously
-      Navigator.pushNamedAndRemoveUntil(context,
+      Navigator.pushNamedAndRemoveUntil(
+        context,
         UserInformationScreen.routeName,
-        (route) => false,
+            (route) => false,
       );
     } on FirebaseAuthException catch (e) {
       // ignore: use_build_context_synchronously
@@ -103,9 +104,9 @@ class AuthRepoistory {
         photoUrl = await ref
             .read(commonFirebaseStorageRepositoryProvider)
             .storeFileToFirebase(
-              'profilePic/$uid',
-              profilePic,
-            );
+          'profilePic/$uid',
+          profilePic,
+        );
       }
 
       var user = UserModel(
@@ -128,7 +129,7 @@ class AuthRepoistory {
             webScreenLayout: WebScreenLayout(),
           ),
         ),
-        (route) => false,
+            (route) => false,
       );
     } catch (e) {
       // ignore: use_build_context_synchronously
@@ -139,9 +140,9 @@ class AuthRepoistory {
   Stream<UserModel> userData(String userId) {
     return firestore.collection('users').doc(userId).snapshots().map(
           (event) => UserModel.fromMap(
-            event.data()!,
-          ),
-        );
+        event.data()!,
+      ),
+    );
   }
 
   void setUserState(bool isOnline) async {

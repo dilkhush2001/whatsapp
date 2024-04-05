@@ -2,8 +2,12 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:whatsapp/feature/auth/repository/auth_repository.dart';
-import 'package:whatsapp/models/user_model.dart';
+// import 'package:whatsapp_clone_flutter/features/auth/repository/auth_repository.dart';
+// import 'package:whatsapp_clone_flutter/models/user_model.dart';
+
+import '../../../models/user_model.dart';
+import '../repository/auth_repository.dart';
+
 final authControllerProvider = Provider((ref) {
   final authRepoistory = ref.watch(authRepositoryProvider);
   return AuthController(authRepoistory: authRepoistory, ref: ref);
